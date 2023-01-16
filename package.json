@@ -1,6 +1,7 @@
 {
   "name": "test-assignment-appbooster",
   "private": true,
+  "homepage": "https://rtinit.github.io/test-assignment-appbooster/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
