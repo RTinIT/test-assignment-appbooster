@@ -1,34 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import { getUrl } from "./api/getUrl";
+import { getKey } from "./utils";
+import useFetch from "./hooks/useFetch";
+import "./App.css";
+import SelectComponent from "./components/SelectComponent";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [selectFromCurrency, setSelectFromCurrency] = useState("");
+  const [selectToCurrency, setSelectToCurrency] = useState("");
+  const [count, setCount] = useState(1);
+  const [coefficient, setCoefficient] = useState("");
+
+  const [loading, error, data] = useFetch(getUrl());
+
+  const getCurrency = async () => {
+    const currencyCodeFrom = getKey(data, selectFromCurrency);
+    const currencyCodeTo = getKey(data, selectToCurrency);
+
+    const resp = await fetch(getUrl(currencyCodeFrom));
+
+    const result = await resp.json();
+
+    setCoefficient(result[currencyCodeFrom][currencyCodeTo]);
+  };
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <section>
+        <h1>Currency Converter</h1>
+        <SelectComponent
+          title="From : "
+          value={selectFromCurrency}
+          onChange={(e) => setSelectFromCurrency(e.target.value)}
+          data={data}
+        />
+        <SelectComponent
+          title="to : "
+          value={selectToCurrency}
+          onChange={(e) => setSelectToCurrency(e.target.value)}
+          data={data}
+        />
+        <>
+          <h2>Enter count : </h2>
+          <input value={count} onChange={(e) => setCount(e.target.value)} />
+          <button onClick={getCurrency}>Get result</button>
+          <h2>Result : </h2>
+          <p>
+            {coefficient && coefficient * count}{" "}
+            <span>{coefficient && selectToCurrency}</span>
+          </p>
+        </>
+      </section>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
