@@ -3,48 +3,44 @@ import useFetch from "../hooks/useFetch";
 import { getKey } from "../utils";
 import { getUrl } from "../api/getUrl";
 import SelectComponent from "../components/SelectComponent";
+import { useCurrency } from "../context/CurrencyProvider";
 
 const Converter = () => {
-  const [selectFromCurrency, setSelectFromCurrency] = useState("");
-  const [selectToCurrency, setSelectToCurrency] = useState("");
+  const {
+    selectedCurrency,
+    setCurrency,
+    toCurrency,
+    selectToCurrency,
+    allCurrenciesCodes,
+    coefficient,
+    getExchangeRate,
+  } = useCurrency();
+
   const [count, setCount] = useState(1);
-  const [coefficient, setCoefficient] = useState("");
 
-  const [loading, error, data] = useFetch(getUrl());
-
-  const getCurrency = async () => {
-    const currencyCodeFrom = getKey(data, selectFromCurrency);
-    const currencyCodeTo = getKey(data, selectToCurrency);
-
-    const resp = await fetch(getUrl(currencyCodeFrom));
-
-    const result = await resp.json();
-
-    setCoefficient(result[currencyCodeFrom][currencyCodeTo]);
-  };
   return (
     <section className="converter">
       <h1>Currency Converter</h1>
       <SelectComponent
         title="From : "
-        value={selectFromCurrency}
-        onChange={(e) => setSelectFromCurrency(e.target.value)}
-        data={data}
+        value={selectedCurrency}
+        onChange={(e) => setCurrency(e.target.value)}
+        data={allCurrenciesCodes}
       />
       <SelectComponent
         title="to : "
-        value={selectToCurrency}
-        onChange={(e) => setSelectToCurrency(e.target.value)}
-        data={data}
+        value={toCurrency}
+        onChange={(e) => selectToCurrency(e.target.value)}
+        data={allCurrenciesCodes}
       />
       <>
         <h2>Enter count : </h2>
         <input value={count} onChange={(e) => setCount(e.target.value)} />
-        <button onClick={getCurrency}>Get result</button>
+        <button onClick={getExchangeRate}>Get result</button>
         <h2>Result : </h2>
         <p>
           {coefficient && coefficient * count}{" "}
-          <span>{coefficient && selectToCurrency}</span>
+          <span>{coefficient && toCurrency}</span>
         </p>
       </>
     </section>
