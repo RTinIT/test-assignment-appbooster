@@ -15,6 +15,21 @@
   -webkit-text-size-adjust: 100%;
 }
 
+aside {
+  position: absolute;
+  height: 400px;
+  overflow: overlay;
+  width: 500px;
+  top: 0;
+  left: -620px;
+  background: #b6c3cf;
+  transition: ease-out .5s;
+}
+
+.active {
+  left: -50px;
+}
+
 select {
   font-size: 1.5em;
 }
