@@ -19,7 +19,10 @@ export const CurrencyProvider = ({ children }) => {
       `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${selectedCurrency}/${targetCurrency}.json`
     )
       .then((data) => data.json())
-      .then((data) => setResult(amount * data[targetCurrency]));
+      .then((data) => {
+        const rate = (amount * data[targetCurrency]).toFixed(2);
+        setResult(rate);
+      });
   };
 
   const setCurrency = (value) => {
