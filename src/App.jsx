@@ -1,14 +1,19 @@
 import Navigation from "./components/Navigation";
 import AppRouter from "./components/AppRouter";
+import styled from "styled-components";
 import "./App.css";
 
-function App() {
+const StyledApp = styled.div`
+  width: 100%;
+`;
+
+const App = () => {
   return (
-    <div className="App">
+    <StyledApp>
       <Navigation />
       <AppRouter />
-    </div>
+    </StyledApp>
   );
-}
+};
 
 export default App;
