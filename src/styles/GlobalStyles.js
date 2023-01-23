@@ -25,7 +25,7 @@ export default createGlobalStyle`
   }
 
   h1 {
-    font-size: 2em;
+    font-size: var(--title-size);
     line-height: 1.1;
   }
 

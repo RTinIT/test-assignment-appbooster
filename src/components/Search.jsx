@@ -11,7 +11,7 @@ const InfoField = styled.aside`
 
 const TextField = styled.div`
   padding: 10px;
-  background: #f5f5f5;
+  background: var(--bg-color);
   border-radius: 4px;
 `;
 
@@ -21,22 +21,6 @@ const Search = ({
   setSearch = (it) => it,
   handleSearch = (it) => it,
 }) => {
-  // const handleSearch = (event) => {
-  //   event.preventDefault();
-  //   if (!search) {
-  //     setMessage(["Please, enter some word."]);
-  //     return;
-  //   }
-  //   const allCurrenciesNames = Object.values(allCurrenciesCodes);
-  //   const matchedNames = allCurrenciesNames.filter((curName) =>
-  //     curName.toLowerCase().includes(search.toLowerCase())
-  //   );
-  //   const shortNames = matchedNames.map(
-  //     (name) => `${getKey(allCurrenciesCodes, name)} (${name})`
-  //   );
-  //   setSearchResult([...shortNames]);
-  // };
-
   return (
     <InfoField>
       <TextField>

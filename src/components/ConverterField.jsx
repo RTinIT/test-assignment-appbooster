@@ -9,7 +9,7 @@ const StyledConverter = styled.section`
   flex: 3;
   padding: 50px 20px;
   border-radius: 4px;
-  background: #f5f5f5;
+  background: var(--bg-color);
 `;
 
 const ConverterField = () => {
