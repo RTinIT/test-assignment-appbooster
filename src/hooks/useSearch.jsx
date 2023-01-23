@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useCurrencyNames } from "../context/CurrencyNamesProvider";
 import { useCurrency } from "../context/CurrencyProvider";
 import { getKey } from "../utils";
 
@@ -6,7 +7,7 @@ const useSearch = () => {
   const [search, setSearch] = useState("dollar");
   const [message, setMessage] = useState("");
   const [searchResult, setSearchResult] = useState([]);
-  const { allCurrenciesCodes } = useCurrency();
+  const { data, getAllNames, getAllCurrPair } = useCurrencyNames();
 
   const saveSearch = (value) => {
     setSearch(value);
@@ -18,14 +19,13 @@ const useSearch = () => {
       setMessage(["Please, enter some word."]);
       return;
     }
-    const allCurrenciesNames = Object.values(allCurrenciesCodes);
-    const matchedNames = allCurrenciesNames.filter((curName) =>
-      curName.toLowerCase().includes(search.toLowerCase())
-    );
-    const shortNames = matchedNames.map(
-      (name) => `${getKey(allCurrenciesCodes, name)} (${name})`
-    );
-    setSearchResult([...shortNames]);
+    const allCurr = getAllCurrPair();
+    const matchedCurr = allCurr.filter((currency) => {
+      const [code, name] = currency;
+      return name.toLowerCase().includes(search.toLowerCase());
+    });
+
+    setSearchResult([...matchedCurr]);
   };
 
   return {
