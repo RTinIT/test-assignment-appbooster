@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Search from "../components/Search";
 import useSearch from "../hooks/useSearch";
 import ConverterField from "../components/ConverterField";
-import OutputInfoField from "../components/OutputInfoField";
+import Table from "../components/Table";
 
 const StyledSection = styled.main`
   display: flex;
@@ -25,11 +25,7 @@ const Converter = () => {
         handleSearch={handleSearch}
       />
       <ConverterField />
-      {searchResult.length ? (
-        <OutputInfoField searchResult={searchResult} />
-      ) : (
-        ""
-      )}
+      {searchResult.length ? <Table search={searchResult} /> : ""}
     </StyledSection>
   );
 };
