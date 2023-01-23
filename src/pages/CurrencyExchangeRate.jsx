@@ -1,26 +1,38 @@
-import React from "react";
-import { getUrl } from "../api/getUrl";
+import React, { useEffect, useState } from "react";
+import Table from "../components/Table";
 import { useCurrency } from "../context/CurrencyProvider";
-import useFetch from "../hooks/useFetch";
-import { getValue } from "../utils";
+import { baseUrl } from "../api/baseUrl";
 
 const CurrencyExchangeRate = () => {
-  const { allCurrenciesCodes, input } = useCurrency();
-  const [rate] = useFetch(getUrl(getValue(input)));
+  const { selectedCurrencyCode, selectedCurrencyName } = useCurrency();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState();
+  const [rate, setRate] = useState();
+
+  useEffect(() => {
+    fetch(`${baseUrl}/${selectedCurrencyCode}.json`)
+      .then((data) => data.json())
+      .then((data) => setRate(data))
+      .then(() => setLoading(false))
+      .catch(setError);
+  }, []);
+
+  if (loading) return <h1>Loading...</h1>;
+  if (error)
+    return (
+      <h1>
+        {error}: {error.message}
+      </h1>
+    );
 
   return (
     <section className="currency-exchange-rate">
-      <h2>Currency Exchange Rate</h2>
+      <h2>
+        <span style={{ background: "yellow" }}>{selectedCurrencyName}</span>{" "}
+        exchange rates:
+      </h2>
       <div>
-        <h3>1 {getValue(input)} =</h3>
-        <ul>
-          {Object.values(allCurrenciesCodes).map((currency, i) => (
-            <li key={i}>
-              <span>{rate && Object.values(rate[getValue(input)])[i]}</span>{" "}
-              {currency}
-            </li>
-          ))}
-        </ul>
+        <Table rate={rate[selectedCurrencyCode]} />
       </div>
     </section>
   );
