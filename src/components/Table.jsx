@@ -44,7 +44,7 @@ const Table = ({ rate, search }) => {
         <thead>
           <StyledTr>
             <StyledTh>Currency</StyledTh>
-            <StyledTh>Code</StyledTh>
+            <StyledTh>Short name</StyledTh>
           </StyledTr>
         </thead>
         <tbody>
