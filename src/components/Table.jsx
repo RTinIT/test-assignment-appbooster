@@ -67,7 +67,11 @@ const Table = ({ rate, search }) => {
       <tbody>
         {AllCurrPair &&
           AllCurrPair.map((curr, i) => (
-            <TCell key={i} col1={curr[1]} col2={Object.values(rate)[i]} />
+            <TCell
+              key={i}
+              col1={curr[1]}
+              col2={Object.values(rate)[i].toFixed(2)}
+            />
           ))}
       </tbody>
     </StyledTable>
