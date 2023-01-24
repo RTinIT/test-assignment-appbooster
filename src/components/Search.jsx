@@ -28,10 +28,14 @@ const Search = ({
         <p>Use search!</p>
       </TextField>
       <Form>
-        <Input value={search} onChange={(e) => setSearch(e.target.value)} />
+        <Input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Show all"
+        />
         <Button onClick={handleSearch}>Search</Button>
       </Form>
-      {!search && <p>{message}</p>}
+      {message && <p>{message}</p>}
     </InfoField>
   );
 };

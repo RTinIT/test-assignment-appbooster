@@ -13,7 +13,7 @@ const StyledConverter = styled.section`
 `;
 
 const ConverterField = () => {
-  const { input, setCurrency, result, handleSubmit } = useCurrency();
+  const { input, message, setCurrency, result, handleSubmit } = useCurrency();
 
   return (
     <StyledConverter>
@@ -24,6 +24,7 @@ const ConverterField = () => {
         <Input value={result} readOnly />
         <Button>Send</Button>
       </Form>
+      {message && <p>{message}</p>}
     </StyledConverter>
   );
 };

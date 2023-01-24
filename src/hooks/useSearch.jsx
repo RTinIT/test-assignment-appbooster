@@ -1,31 +1,37 @@
 import React, { useState } from "react";
 import { useCurrencyNames } from "../context/CurrencyNamesProvider";
-import { useCurrency } from "../context/CurrencyProvider";
-import { getKey } from "../utils";
+import { ifIsEmptySetMessage } from "../utils";
 
 const useSearch = () => {
   const [search, setSearch] = useState("dollar");
   const [message, setMessage] = useState("");
   const [searchResult, setSearchResult] = useState([]);
-  const { data, getAllNames, getAllCurrPair } = useCurrencyNames();
+  const { getAllCurrPair } = useCurrencyNames();
 
   const saveSearch = (value) => {
     setSearch(value);
   };
 
-  const handleSearch = (event) => {
-    event.preventDefault();
-    if (!search) {
-      setMessage(["Please, enter some word."]);
-      return;
-    }
-    const allCurr = getAllCurrPair();
-    const matchedCurr = allCurr.filter((currency) => {
+  const findMatches = (list, search) => {
+    const matchedCurrencies = list.filter((currency) => {
       const [code, name] = currency;
       return name.toLowerCase().includes(search.toLowerCase());
     });
+    return matchedCurrencies;
+  };
 
-    setSearchResult([...matchedCurr]);
+  const handleSearch = (event) => {
+    event.preventDefault();
+
+    const allNamesAndCodesOfCurrency = getAllCurrPair();
+    const matchedCurrencies = findMatches(allNamesAndCodesOfCurrency, search);
+    setSearchResult([...matchedCurrencies]);
+
+    ifIsEmptySetMessage(
+      matchedCurrencies.length,
+      setMessage,
+      "There is no matches"
+    );
   };
 
   return {
