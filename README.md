@@ -18,3 +18,5 @@
 Для реализации используйте
 
 - Любые библиотеки, которые считаете уместными.
+
+### [Demo]( https://rtinit.github.io/test-assignment-appbooster/)
