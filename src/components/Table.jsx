@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import { useCurrencyNames } from "../context/CurrencyNamesProvider";
 import TCell from "./TCell";
@@ -33,14 +33,19 @@ const StyledTh = styled.th`
   background: #1f273930;
 `;
 
-const Table = ({ rate, search }) => {
+const Table = ({ rate, search, makeScroll }) => {
+  const tRef = useRef(null);
   const { getAllCurrPair } = useCurrencyNames();
 
   const AllCurrPair = getAllCurrPair();
 
+  useEffect(() => {
+    if (!rate) makeScroll(tRef);
+  }, [search]);
+
   if (!rate) {
     return (
-      <StyledTable>
+      <StyledTable ref={tRef}>
         <thead>
           <StyledTr>
             <StyledTh>Currency</StyledTh>

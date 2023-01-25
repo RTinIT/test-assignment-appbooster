@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import Search from "../components/Search";
 import useSearch from "../hooks/useSearch";
@@ -16,6 +16,10 @@ const Converter = () => {
   const { search, message, saveSearch, handleSearch, searchResult } =
     useSearch();
 
+  const makeScroll = (ref) => {
+    ref.current.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <StyledSection>
       <Search
@@ -25,7 +29,12 @@ const Converter = () => {
         handleSearch={handleSearch}
       />
       <ConverterField />
-      {searchResult.length ? <Table search={searchResult} /> : ""}
+
+      {searchResult.length ? (
+        <Table makeScroll={makeScroll} search={searchResult} />
+      ) : (
+        ""
+      )}
     </StyledSection>
   );
 };
