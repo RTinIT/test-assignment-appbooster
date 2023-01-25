@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Form from "./Form";
 import Input from "./Input";
 import Button from "./Button";
+import WarningMessage from "./WarningMessage";
 
 const InfoField = styled.aside`
   flex: 1.5;
@@ -35,7 +36,7 @@ const Search = ({
         />
         <Button onClick={handleSearch}>Search</Button>
       </Form>
-      {message && <p>{message}</p>}
+      {message && <WarningMessage>{message}</WarningMessage>}
     </InfoField>
   );
 };

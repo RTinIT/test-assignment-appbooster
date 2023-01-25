@@ -30,7 +30,7 @@ const useSearch = () => {
     ifIsEmptySetMessage(
       matchedCurrencies.length,
       setMessage,
-      "There is no matches"
+      "There is no matches."
     );
   };
 

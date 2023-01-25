@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Form from "./Form";
 import Input from "./Input";
 import Button from "./Button";
+import WarningMessage from "./WarningMessage";
 import { useCurrency } from "../context/CurrencyProvider";
 
 const StyledConverter = styled.section`
@@ -24,7 +25,7 @@ const ConverterField = () => {
         <Input value={result} readOnly />
         <Button>Send</Button>
       </Form>
-      {message && <p>{message}</p>}
+      {message && <WarningMessage addExample={true}>{message}</WarningMessage>}
     </StyledConverter>
   );
 };

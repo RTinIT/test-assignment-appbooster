@@ -30,11 +30,7 @@ export const CurrencyProvider = ({ children }) => {
         const rate = (amount * data[targetCurrency]).toFixed(2);
         setResult(rate);
       })
-      .catch((err) =>
-        setMessage(
-          "Please following example: [Amount] [currency short name] in [target currency short name]"
-        )
-      );
+      .catch((err) => setMessage("Please follow the example: "));
   };
 
   const setCurrency = (value) => {

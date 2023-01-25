@@ -6,6 +6,7 @@ export default createGlobalStyle`
     --title-size: 2em;
     --text-size: 1.5em;
     --bg-color: #f5f5f5;
+    --warning-color: #eb3941;
 
     font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
     font-size: 20px;
