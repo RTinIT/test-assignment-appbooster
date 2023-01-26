@@ -6,14 +6,14 @@ import Button from "./Button";
 import WarningMessage from "./WarningMessage";
 
 const InfoField = styled.aside`
-  flex: 1.5;
   padding: 0 20px;
+  border-radius: 4px;
+  background: var(--bg-color);
+  width: 70%;
 `;
 
 const TextField = styled.div`
   padding: 10px;
-  background: var(--bg-color);
-  border-radius: 4px;
 `;
 
 const Search = ({

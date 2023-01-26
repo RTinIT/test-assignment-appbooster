@@ -3,14 +3,28 @@ import styled from "styled-components";
 import Form from "./Form";
 import Input from "./Input";
 import Button from "./Button";
+import Title from "./Title";
 import WarningMessage from "./WarningMessage";
 import { useCurrency } from "../context/CurrencyProvider";
 
 const StyledConverter = styled.section`
-  flex: 3;
-  padding: 50px 20px;
+  width: 70%;
+  padding: 20px 20px;
   border-radius: 4px;
   background: var(--bg-color);
+`;
+
+const StyledTitle = styled.h1`
+  @media (max-width: 960px) {
+    font-size: 1.2em;
+  }
+  @media (max-width: 360px) {
+    font-size: 1em;
+  }
+`;
+
+const StyledParagraph = styled.p`
+  margin: 0;
 `;
 
 const ConverterField = () => {
@@ -18,10 +32,10 @@ const ConverterField = () => {
 
   return (
     <StyledConverter>
-      <h1>Currency Converter</h1>
+      <Title>Currency Converter</Title>
       <Form onSubmit={handleSubmit}>
         <Input value={input} onChange={(e) => setCurrency(e.target.value)} />
-        <p>Result:</p>
+        <StyledParagraph>Result:</StyledParagraph>
         <Input value={result} readOnly />
         <Button>Send</Button>
       </Form>

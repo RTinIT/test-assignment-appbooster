@@ -21,6 +21,10 @@ const StyledInput = styled.input`
   &:focus {
     outline: 2px solid grey;
   }
+
+  @media (max-width: 960px) {
+    max-width: none;
+  }
 `;
 
 const Input = (props) => {

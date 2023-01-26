@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 import Search from "../components/Search";
 import useSearch from "../hooks/useSearch";
@@ -7,9 +7,10 @@ import Table from "../components/Table";
 
 const StyledSection = styled.main`
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1em;
 `;
 
 const Converter = () => {

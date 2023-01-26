@@ -32,6 +32,7 @@ const Button3D = styled.button`
 
 const ButtonLink = styled(NavLink)`
   display: block;
+  width: 130px;
   box-sizing: border-box;
   border: 2px solid var(--button_outline_color);
   border-radius: var(--button_radius);
@@ -47,6 +48,11 @@ const ButtonLink = styled(NavLink)`
 
   &:active {
     transform: translateY(0);
+  }
+
+  @media (max-width: 500px) {
+    padding: 0.5em 0.7em;
+    width: 100px;
   }
 `;
 

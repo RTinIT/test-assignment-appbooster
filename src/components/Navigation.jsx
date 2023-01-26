@@ -7,6 +7,7 @@ const Nav = styled.nav`
   justify-content: flex-start;
   align-items: center;
   padding: 2em;
+  gap: 0.2em;
 `;
 
 const Navigation = () => {
@@ -19,7 +20,7 @@ const Navigation = () => {
         isLink={true}
         to="/test-assignment-appbooster/currencies-exchange-rate"
       >
-        All currencies
+        All rates
       </Button>
     </Nav>
   );

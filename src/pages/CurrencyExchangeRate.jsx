@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Table from "../components/Table";
 import { useCurrency } from "../context/CurrencyProvider";
 import { baseUrl } from "../api/baseUrl";
+import Title from "../components/Title";
 
 const CurrencyExchangeRate = () => {
   const { selectedCurrencyCode, selectedCurrencyName } = useCurrency();
@@ -27,10 +28,7 @@ const CurrencyExchangeRate = () => {
 
   return (
     <section className="currency-exchange-rate">
-      <h2>
-        <span style={{ background: "yellow" }}>{selectedCurrencyName}</span>{" "}
-        exchange rates:
-      </h2>
+      <Title highlight={selectedCurrencyName}> exchange rates:</Title>
       <div>
         <Table rate={rate[selectedCurrencyCode]} />
       </div>

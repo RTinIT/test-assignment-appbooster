@@ -6,10 +6,13 @@ import TCell from "./TCell";
 const StyledTable = styled.table`
   text-align: left;
   overflow: hidden;
-  width: 60%;
+  width: 75%;
   margin: 0 auto;
   display: table;
-  padding: 4em 0 4em 0;
+
+  @media (max-width: 550px) {
+    font-size: 0.8em;
+  }
 `;
 
 const StyledTr = styled.tr`
