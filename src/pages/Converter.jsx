@@ -23,19 +23,7 @@ const Converter = () => {
 
   return (
     <StyledSection>
-      <Search
-        search={search}
-        setSearch={saveSearch}
-        message={message}
-        handleSearch={handleSearch}
-      />
       <ConverterField />
-
-      {searchResult.length ? (
-        <Table makeScroll={makeScroll} search={searchResult} />
-      ) : (
-        ""
-      )}
     </StyledSection>
   );
 };

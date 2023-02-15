@@ -9,28 +9,40 @@ export const useCurrency = () => useContext(CurrencyContext);
 
 export const CurrencyProvider = ({ children }) => {
   const [input, setInput] = useState("15 usd in rub");
+  const [from, setFrom] = useState("United States dollar");
+  const [to, setTo] = useState("Russian ruble");
+  const [amount, setAmount] = useState(1);
   const [result, setResult] = useState("");
   const [message, setMessage] = useState("");
   const [selectedCurrencyCode, setSelectedCurrencyCode] = useState(() => {
     const [, selCurr] = input.split(" ");
     return selCurr;
   });
-  const { data } = useCurrencyNames();
+  const { data, getAllCurrPair } = useCurrencyNames();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!ifIsEmptySetMessage(input, setMessage, "Empty input")) return;
+    const codeFrom = getCode(from);
+    const codeTo = getCode(to);
 
-    const [amount, selectedCurrency, , targetCurrency] = input.split(" ");
+    // if (!ifIsEmptySetMessage(input, setMessage, "Empty input")) return;
 
-    fetch(`${baseUrl}/${selectedCurrency}/${targetCurrency}.json`)
+    // const [amount, selectedCurrency, , targetCurrency] = input.split(" ");
+
+    fetch(`${baseUrl}/${codeFrom}/${codeTo}.json`)
       .then((data) => data.json())
       .then((data) => {
-        const rate = (amount * data[targetCurrency]).toFixed(2);
+        const rate = (amount * data[codeTo]).toFixed(2);
         setResult(rate);
       })
       .catch((err) => setMessage("Please follow the example: "));
+  };
+
+  const getCode = (curr) => {
+    const allCurrPair = getAllCurrPair();
+    const [code, name] = allCurrPair.find(([code, name]) => name === curr);
+    return code;
   };
 
   const setCurrency = (value) => {
@@ -50,6 +62,12 @@ export const CurrencyProvider = ({ children }) => {
         input,
         result,
         message,
+        from,
+        setFrom,
+        to,
+        setTo,
+        amount,
+        setAmount,
         setCurrency,
         handleSubmit,
         selectedCurrencyCode,
