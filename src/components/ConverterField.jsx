@@ -6,6 +6,7 @@ import Button from "./Button";
 import Title from "./Title";
 import WarningMessage from "./WarningMessage";
 import { useCurrency } from "../context/CurrencyProvider";
+import Select from "./Select";
 
 const StyledConverter = styled.section`
   width: 70%;
@@ -23,20 +24,48 @@ const StyledTitle = styled.h1`
   }
 `;
 
+const StyledNumberInput = styled.div`
+  width: 42%;
+`;
+
 const StyledParagraph = styled.p`
   margin: 0;
 `;
 
 const ConverterField = () => {
-  const { input, message, setCurrency, result, handleSubmit } = useCurrency();
+  const {
+    input,
+    message,
+    setCurrency,
+    result,
+    handleSubmit,
+    from,
+    setFrom,
+    to,
+    setTo,
+    amount,
+    setAmount,
+  } = useCurrency();
 
   return (
     <StyledConverter>
       <Title>Currency Converter</Title>
       <Form onSubmit={handleSubmit}>
-        <Input value={input} onChange={(e) => setCurrency(e.target.value)} />
+        <StyledParagraph>From:</StyledParagraph>
+        <StyledNumberInput>
+          <Input
+            value={amount}
+            type="number"
+            onChange={(e) => setAmount(e.target.value)}
+          />
+        </StyledNumberInput>
+        <Select currency={from} setCurrency={setFrom} />
+        <StyledParagraph>To:</StyledParagraph>
+        <Select currency={to} setCurrency={setTo} />
         <StyledParagraph>Result:</StyledParagraph>
-        <Input value={result} readOnly />
+        <StyledNumberInput>
+          <Input value={result} readOnly />
+        </StyledNumberInput>
         <Button>Send</Button>
       </Form>
       {message && <WarningMessage addExample={true}>{message}</WarningMessage>}
