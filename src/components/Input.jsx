@@ -4,9 +4,7 @@ import styled from "styled-components";
 const StyledInput = styled.input`
   width: 100%;
   max-width: 220px;
-  min-width: 5em;
-  height: 20px;
-  padding: 12px;
+  padding: 2px 0;
   border-radius: 4px;
   border: 1.5px solid lightgrey;
   outline: none;
