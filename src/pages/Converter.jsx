@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Search from "../components/Search";
-import useSearch from "../hooks/useSearch";
 import ConverterField from "../components/ConverterField";
-import Table from "../components/Table";
 
 const StyledSection = styled.main`
   display: flex;
@@ -11,16 +8,10 @@ const StyledSection = styled.main`
   align-items: center;
   flex-direction: column;
   gap: 1em;
+  padding: 0 40px;
 `;
 
 const Converter = () => {
-  const { search, message, saveSearch, handleSearch, searchResult } =
-    useSearch();
-
-  const makeScroll = (ref) => {
-    ref.current.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <StyledSection>
       <ConverterField />
