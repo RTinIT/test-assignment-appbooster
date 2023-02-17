@@ -36,33 +36,9 @@ const StyledTh = styled.th`
   background: #1f273930;
 `;
 
-const Table = ({ rate, search, makeScroll }) => {
-  const tRef = useRef(null);
+const Table = ({ rate }) => {
   const { getAllCurrPair } = useCurrencyNames();
-
   const AllCurrPair = getAllCurrPair();
-
-  useEffect(() => {
-    if (!rate) makeScroll(tRef);
-  }, [search]);
-
-  if (!rate) {
-    return (
-      <StyledTable ref={tRef}>
-        <thead>
-          <StyledTr>
-            <StyledTh>Currency</StyledTh>
-            <StyledTh>Short name</StyledTh>
-          </StyledTr>
-        </thead>
-        <tbody>
-          {search.map((curr, i) => (
-            <TCell key={i} col1={curr[1]} col2={curr[0]} />
-          ))}
-        </tbody>
-      </StyledTable>
-    );
-  }
 
   return (
     <StyledTable>
