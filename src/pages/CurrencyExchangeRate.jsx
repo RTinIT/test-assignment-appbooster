@@ -5,13 +5,13 @@ import { baseUrl } from "../api/baseUrl";
 import Title from "../components/Title";
 
 const CurrencyExchangeRate = () => {
-  const { selectedCurrencyCode, selectedCurrencyName } = useCurrency();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
   const [rate, setRate] = useState();
+  const { fromCode, fromName } = useCurrency();
 
   useEffect(() => {
-    fetch(`${baseUrl}/${selectedCurrencyCode}.json`)
+    fetch(`${baseUrl}/${fromCode}.json`)
       .then((data) => data.json())
       .then((data) => setRate(data))
       .then(() => setLoading(false))
@@ -28,9 +28,9 @@ const CurrencyExchangeRate = () => {
 
   return (
     <section className="currency-exchange-rate">
-      <Title highlight={selectedCurrencyName}> exchange rates:</Title>
+      <Title highlight={fromName}> exchange rates:</Title>
       <div>
-        <Table rate={rate[selectedCurrencyCode]} />
+        <Table rate={rate[fromCode]} />
       </div>
     </section>
   );

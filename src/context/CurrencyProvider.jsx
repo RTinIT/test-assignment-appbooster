@@ -1,39 +1,34 @@
 import React, { createContext, useContext, useState } from "react";
 import { useCurrencyNames } from "./CurrencyNamesProvider";
 import { baseUrl } from "../api/baseUrl";
-import { ifIsEmptySetMessage } from "../utils";
 
 const CurrencyContext = createContext();
 
 export const useCurrency = () => useContext(CurrencyContext);
 
 export const CurrencyProvider = ({ children }) => {
-  const [input, setInput] = useState("15 usd in rub");
-  const [from, setFrom] = useState("United States dollar");
-  const [to, setTo] = useState("Russian ruble");
+  const [fromName, setFromName] = useState("United States dollar");
+  const [toName, setToName] = useState("Russian ruble");
+  const [fromCode, setFromCode] = useState("usd");
   const [amount, setAmount] = useState(1);
-  const [result, setResult] = useState("");
+
+  const [result, setResult] = useState(null);
   const [message, setMessage] = useState("");
-  const [selectedCurrencyCode, setSelectedCurrencyCode] = useState(() => {
-    const [, selCurr] = input.split(" ");
-    return selCurr;
-  });
-  const { data, getAllCurrPair } = useCurrencyNames();
+  const { getAllCurrPair } = useCurrencyNames();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const codeFrom = getCode(from);
-    const codeTo = getCode(to);
+    const codeTo = getCode(toName);
 
-    // if (!ifIsEmptySetMessage(input, setMessage, "Empty input")) return;
-
-    // const [amount, selectedCurrency, , targetCurrency] = input.split(" ");
-
-    fetch(`${baseUrl}/${codeFrom}/${codeTo}.json`)
+    fetch(`${baseUrl}/${fromCode}/${codeTo}.json`)
       .then((data) => data.json())
       .then((data) => {
-        const rate = (amount * data[codeTo]).toFixed(2);
+        const { date } = data;
+        const rate = {
+          date,
+          rate: (amount * data[codeTo]).toFixed(2),
+        };
         setResult(rate);
       })
       .catch((err) => setMessage("Please follow the example: "));
@@ -45,33 +40,25 @@ export const CurrencyProvider = ({ children }) => {
     return code;
   };
 
-  const setCurrency = (value) => {
-    setInput(value);
-    const [, newCurrCode] = value.split(" ");
-    setSelectedCurrencyCode(newCurrCode);
-  };
-
-  const getSelectedCurrName = () => {
-    if (!data) return;
-    return data[selectedCurrencyCode];
+  const saveFromCode = (currName) => {
+    const code = getCode(currName);
+    setFromCode(code);
   };
 
   return (
     <CurrencyContext.Provider
       value={{
-        input,
         result,
         message,
-        from,
-        setFrom,
-        to,
-        setTo,
+        fromName,
+        setFromName,
+        toName,
+        setToName,
+        fromCode,
+        saveFromCode,
         amount,
         setAmount,
-        setCurrency,
         handleSubmit,
-        selectedCurrencyCode,
-        selectedCurrencyName: getSelectedCurrName(),
       }}
     >
       {children}
