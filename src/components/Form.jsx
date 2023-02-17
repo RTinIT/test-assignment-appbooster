@@ -2,15 +2,25 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledForm = styled.form`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2em;
-  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1.3fr 1fr;
+  gap: 15px 5px;
+  grid-template-areas:
+    "amount from to"
+    "result result btn";
 
-  @media (max-width: 960px) {
-    flex-direction: column;
-    gap: 1em;
+  @media (max-width: 600px) {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px 5px;
+    grid-template-areas:
+      "amount"
+      "from"
+      "to"
+      "result"
+      "btn";
   }
 `;
 

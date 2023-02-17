@@ -4,7 +4,6 @@ import Form from "./Form";
 import Input from "./Input";
 import Button from "./Button";
 import Title from "./Title";
-import WarningMessage from "./WarningMessage";
 import { useCurrency } from "../context/CurrencyProvider";
 import Select from "./Select";
 
@@ -13,36 +12,61 @@ const StyledConverter = styled.section`
   padding: 20px 20px;
   border-radius: 4px;
   background: var(--bg-color);
-`;
 
-const StyledTitle = styled.h1`
-  @media (max-width: 960px) {
-    font-size: 1.2em;
-  }
-  @media (max-width: 360px) {
-    font-size: 1em;
+  @media (max-width: 1044px) {
+    width: 95%;
   }
 `;
 
-const StyledNumberInput = styled.div`
-  width: 42%;
+const Wrapper = styled.div`
+  grid-area: ${(props) => props.gridArea};
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+
+  @media (max-width: 600px) {
+    justify-content: center;
+  }
+`;
+
+const InputWrapper = styled.div`
+  width: 100%;
+  padding: ${(props) => props.padding || 0};
 `;
 
 const StyledParagraph = styled.p`
   margin: 0;
+  align-self: flex-start;
+`;
+
+const Substr = styled.span`
+  margin-top: 20px;
+  font-size: 15px;
+
+  @media (max-width: 600px) {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+`;
+
+const Output = styled.h3`
+  width: 100%;
+  margin: 0;
+  border: 1px solid #cdcdcd;
+  border-radius: 4px;
+  padding: 12px 0;
 `;
 
 const ConverterField = () => {
   const {
-    input,
-    message,
-    setCurrency,
     result,
     handleSubmit,
-    from,
-    setFrom,
-    to,
-    setTo,
+    fromName,
+    setFromName,
+    toName,
+    setToName,
+    saveFromCode,
     amount,
     setAmount,
   } = useCurrency();
@@ -51,24 +75,40 @@ const ConverterField = () => {
     <StyledConverter>
       <Title>Currency Converter</Title>
       <Form onSubmit={handleSubmit}>
-        <StyledParagraph>From:</StyledParagraph>
-        <StyledNumberInput>
-          <Input
-            value={amount}
-            type="number"
-            onChange={(e) => setAmount(e.target.value)}
+        <Wrapper gridArea="amount">
+          <StyledParagraph>Amount</StyledParagraph>
+          <InputWrapper>
+            <Input
+              value={amount}
+              type="number"
+              onChange={(e) => setAmount(e.target.value)}
+            />
+          </InputWrapper>
+        </Wrapper>
+        <Wrapper gridArea="from">
+          <StyledParagraph>From</StyledParagraph>
+          <Select
+            currency={fromName}
+            setCurrency={setFromName}
+            setCode={saveFromCode}
           />
-        </StyledNumberInput>
-        <Select currency={from} setCurrency={setFrom} />
-        <StyledParagraph>To:</StyledParagraph>
-        <Select currency={to} setCurrency={setTo} />
-        <StyledParagraph>Result:</StyledParagraph>
-        <StyledNumberInput>
-          <Input value={result} readOnly />
-        </StyledNumberInput>
-        <Button>Send</Button>
+        </Wrapper>
+        <Wrapper gridArea="to">
+          <StyledParagraph>To</StyledParagraph>
+          <Select currency={toName} setCurrency={setToName} />
+        </Wrapper>
+        <Wrapper gridArea="result">
+          <Output>{result ? result.rate : "Click to convert"}</Output>
+          <Substr>
+            {result
+              ? `Last updated ${result.date}`
+              : "The last updated date will be here"}
+          </Substr>
+        </Wrapper>
+        <Wrapper gridArea="btn">
+          <Button>Convert</Button>
+        </Wrapper>
       </Form>
-      {message && <WarningMessage addExample={true}>{message}</WarningMessage>}
     </StyledConverter>
   );
 };
