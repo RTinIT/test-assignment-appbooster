@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Form from "./Form";
 import Input from "./Input";
 import Button from "./Button";
-import Title from "./Title";
 import { useCurrency } from "../context/CurrencyProvider";
 import Select from "./Select";
 
@@ -11,7 +10,6 @@ const StyledConverter = styled.section`
   width: 70%;
   padding: 20px 20px;
   border-radius: 4px;
-  background: var(--bg-color);
 
   @media (max-width: 1044px) {
     width: 95%;
@@ -53,9 +51,9 @@ const Substr = styled.span`
 const Output = styled.h3`
   width: 100%;
   margin: 0;
-  border: 1px solid #cdcdcd;
+  border: 1px solid ${(props) => (props.active ? "#004dff" : "#cdcdcd")};
   border-radius: 4px;
-  padding: 12px 0;
+  padding: 10px 0;
 `;
 
 const ConverterField = () => {
@@ -73,7 +71,6 @@ const ConverterField = () => {
 
   return (
     <StyledConverter>
-      <Title>Currency Converter</Title>
       <Form onSubmit={handleSubmit}>
         <Wrapper gridArea="amount">
           <StyledParagraph>Amount</StyledParagraph>
@@ -98,11 +95,15 @@ const ConverterField = () => {
           <Select currency={toName} setCurrency={setToName} />
         </Wrapper>
         <Wrapper gridArea="result">
-          <Output>{result ? result.rate : "Click to convert"}</Output>
+          <Output active={result ? true : false}>
+            {result ? result.rate : "Click to convert"}
+          </Output>
           <Substr>
-            {result
-              ? `Last updated ${result.date}`
-              : "The last updated date will be here"}
+            {result ? (
+              <time dateTime={result.date}>Last updated {result.date}</time>
+            ) : (
+              "Last update date will be here"
+            )}
           </Substr>
         </Wrapper>
         <Wrapper gridArea="btn">

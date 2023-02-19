@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
   :root {
-    --font-color: #213547;
+    --font-color: #010b3c;
     --title-size: 2em;
     --text-size: 1.5em;
     --bg-color: #f5f5f5;
