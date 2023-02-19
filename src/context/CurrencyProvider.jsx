@@ -13,12 +13,10 @@ export const CurrencyProvider = ({ children }) => {
   const [amount, setAmount] = useState(1);
 
   const [result, setResult] = useState(null);
-  const [message, setMessage] = useState("");
   const { getAllCurrPair } = useCurrencyNames();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const codeTo = getCode(toName);
 
     fetch(`${baseUrl}/${fromCode}/${codeTo}.json`)
@@ -31,7 +29,7 @@ export const CurrencyProvider = ({ children }) => {
         };
         setResult(rate);
       })
-      .catch((err) => setMessage("Please follow the example: "));
+      .catch((err) => console.log(err.message));
   };
 
   const getCode = (curr) => {
@@ -49,7 +47,6 @@ export const CurrencyProvider = ({ children }) => {
     <CurrencyContext.Provider
       value={{
         result,
-        message,
         fromName,
         setFromName,
         toName,
