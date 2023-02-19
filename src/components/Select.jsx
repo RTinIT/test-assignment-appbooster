@@ -12,6 +12,7 @@ const StyledWrapper = styled.div`
   font-size: 1em;
   transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
   box-shadow: 0px 0px 20px -18px;
+  position: relative;
 `;
 const StyledHead = styled.div`
   position: relative;
@@ -53,7 +54,9 @@ const StyledArrow = styled.span`
 
 const StyledContent = styled.div`
   ${(props) => (props.active ? { display: "block" } : { display: "none" })}
-  position: relative;
+  position: absolute;
+  width: 100%;
+  top: 46px;
 `;
 
 const StyledSearchBar = styled.div`
@@ -67,10 +70,12 @@ const StyledSelectItems = styled.ul`
   max-height: 200px;
   overflow-y: scroll;
   position: absolute;
-  top: 110%;
+  top: 108%;
   left: 0;
   background: #fff;
   z-index: 2;
+  box-shadow: 0px 0px 5px 0px blue;
+  border-radius: 4px;
 
   &::-webkit-scrollbar {
     width: 5px;
@@ -85,7 +90,7 @@ const StyledSelectItems = styled.ul`
 `;
 const StyledSelectItem = styled.li`
   list-style: none;
-  padding: 5px 0;
+  padding: 5px 0 5px 10px;
   cursor: pointer;
 
   &:hover {

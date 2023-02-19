@@ -17,7 +17,7 @@ const StyledInput = styled.input`
   }
 
   &:focus {
-    outline: 2px solid grey;
+    outline: 2px solid #004dff;
   }
 
   @media (max-width: 960px) {

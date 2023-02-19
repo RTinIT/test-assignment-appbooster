@@ -8,7 +8,7 @@ const StyledSection = styled.main`
   align-items: center;
   flex-direction: column;
   gap: 1em;
-  padding: 0 40px;
+  padding: 0 2em;
 `;
 
 const Converter = () => {

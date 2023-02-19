@@ -1,76 +1,40 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const Button3D = styled.button`
-  background-color: #fcfcfd;
-  border-radius: 4px;
-  border-width: 0;
-  box-shadow: rgb(45, 35, 66, 0.4) 0 2px 4px,
-    rgb(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 7px 0 inset;
+  color: #fff;
+  border-radius: 5px;
+  padding: 14px 40px;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  background: transparent;
   cursor: pointer;
-  color: #1c172e;
-  transition: 0.2s;
-  font-size: 18px;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  outline: none;
+  font-size: 15px;
+  background: #004dff;
+  background: linear-gradient(0deg, #004dff 0%, #004dff 100%);
+  border: none;
 
-  &:focus {
-    box-shadow: #d6d6e7 0 0 0 1.5px inset, rgb(45, 35, 66, 0.4) 0 2px 4px,
-      rgb(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
+  &:before {
+    height: 0%;
+    width: 2px;
   }
 
   &:hover {
-    box-shadow: rgb(45, 35, 66, 0.4) 0 4px 8px,
-      rgb(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
-    transform: translateY(-2px);
-  }
-
-  &:active {
-    box-shadow: #d6d6e7 0 -3px 0 inset;
-    transform: translateY(-0.2em);
+    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.5),
+      -4px -4px 6px 0 rgba(116, 125, 136, 0.5),
+      inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2),
+      inset 4px 4px 6px 0 rgba(0, 0, 0, 0.4);
   }
 `;
 
-const ButtonLink = styled(NavLink)`
-  display: block;
-  width: 130px;
-  box-sizing: border-box;
-  border: 2px solid var(--button_outline_color);
-  border-radius: var(--button_radius);
-  padding: 0.75em 1.5em;
-  background: var(--button_color);
-  color: var(--button_outline_color);
-  transform: translateY(-0.2em);
-  transition: transform 0.1s ease;
-
-  &:hover {
-    transform: translateY(-0.33em);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-
-  @media (max-width: 500px) {
-    padding: 0.5em 0.7em;
-    width: 100px;
-  }
-`;
-
-const Button = ({
-  isLink = false,
-  onClick = (it) => it,
-  children,
-  ...childrenProps
-}) => {
-  return (
-    <Button3D onClick={onClick}>
-      {isLink ? (
-        <ButtonLink {...childrenProps}>{children}</ButtonLink>
-      ) : (
-        <ButtonLink as={"span"}>{children}</ButtonLink>
-      )}
-    </Button3D>
-  );
+const Button = ({ children, onClick = (it) => it }) => {
+  return <Button3D onClick={onClick}>{children}</Button3D>;
 };
 
 export default Button;

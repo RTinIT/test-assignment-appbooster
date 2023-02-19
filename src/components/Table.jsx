@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useCurrencyNames } from "../context/CurrencyNamesProvider";
 import TCell from "./TCell";
@@ -6,10 +6,13 @@ import TCell from "./TCell";
 const StyledTable = styled.table`
   text-align: left;
   overflow: hidden;
-  width: 75%;
+  width: 66%;
   margin: 0 auto;
   display: table;
 
+  @media (max-width: 1044px) {
+    width: 90%;
+  }
   @media (max-width: 550px) {
     font-size: 0.8em;
   }
@@ -29,7 +32,6 @@ const StyledTh = styled.th`
   font-weight: bold;
   font-size: 1em;
   text-align: left;
-  color: #185875;
   padding-bottom: 2%;
   padding-top: 2%;
   padding-left: 2%;
