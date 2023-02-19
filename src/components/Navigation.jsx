@@ -1,27 +1,40 @@
 import React from "react";
+import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import Button from "./Button";
+import Title from "./Title";
 
 const Nav = styled.nav`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  padding: 2em;
+  padding: 2em 17%;
   gap: 0.2em;
+
+  @media (max-width: 1044px) {
+    padding: 2em 7%;
+  }
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 `;
 
 const Navigation = () => {
   return (
     <Nav className="navigation">
-      <Button isLink={true} to="/test-assignment-appbooster/converter">
-        Converter
-      </Button>
-      <Button
-        isLink={true}
-        to="/test-assignment-appbooster/currencies-exchange-rate"
-      >
-        All rates
-      </Button>
+      <Title>currency converter</Title>
+      <Wrapper>
+        <NavLink to="/test-assignment-appbooster/converter">
+          <FaArrowCircleLeft size={22} color="#004dff" />
+        </NavLink>
+        <NavLink to="/test-assignment-appbooster/currencies-exchange-rate">
+          <FaArrowCircleRight size={22} color="#004dff" />
+        </NavLink>
+      </Wrapper>
     </Nav>
   );
 };
