@@ -19,14 +19,4 @@ const getDate = () => {
   return `${year}-${month}-${day}`;
 };
 
-const ifIsEmptySetMessage = (value, setMessage, message) => {
-  if (!value) {
-    setMessage(message);
-    return 0;
-  } else {
-    setMessage("");
-    return 1;
-  }
-};
-
-export { getKey, getValue, ifIsEmptySetMessage, getDate };
+export { getKey, getValue, getDate };
