@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaAngleDown, FaAngleUp, FaSearch } from "react-icons/fa";
 import styled, { keyframes } from "styled-components";
 import { useCurrencyNames } from "../context/CurrencyNamesProvider";
+import useSelect from "../hooks/useSelect";
 import Input from "./Input";
 
 const StyledWrapper = styled.div`
@@ -14,6 +15,7 @@ const StyledWrapper = styled.div`
   box-shadow: 0px 0px 20px -18px;
   position: relative;
 `;
+
 const StyledHead = styled.div`
   position: relative;
   text-align: start;
@@ -23,6 +25,7 @@ const StyledHead = styled.div`
   padding: 10px;
   cursor: pointer;
 `;
+
 const StyledHeadSpan = styled.span`
   width: 90%;
   padding: 0;
@@ -31,26 +34,13 @@ const StyledHeadSpan = styled.span`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
 `;
-const rotate = keyframes`
-  from {transform: rotateZ(0deg)}
-  to {transform: rotateZ(-180deg)}
-`;
-const arrowStyles = {
-  position: "absolute",
-  top: 10,
-  right: 10,
-  padding: 0,
-};
-const searchStyles = {
-  position: "absolute",
-  top: 10,
-  right: 10,
-  padding: 0,
-};
 
-const StyledArrow = styled.span`
-  animation: ${rotate} 2s linear;
-`;
+const iconStyles = {
+  position: "absolute",
+  top: 10,
+  right: 10,
+  padding: 0,
+};
 
 const StyledContent = styled.div`
   ${(props) => (props.active ? { display: "block" } : { display: "none" })}
@@ -99,45 +89,29 @@ const StyledSelectItem = styled.li`
 `;
 
 const Select = ({ currency, setCurrency, setCode }) => {
-  const [isActive, setIsActive] = useState(false);
-  const [search, setSearch] = useState("");
-  const [searchRes, setSearchRes] = useState(null);
-  const { getAllNames } = useCurrencyNames();
-
-  const selectItem = (item) => {
-    if (setCode) setCode(item);
-    setCurrency(item);
-    setIsActive((v) => !v);
-    setSearch("");
-    setSearchRes(null);
-  };
-
-  const doSearch = () => {
-    if (search) {
-      const data = getAllNames();
-      setSearchRes(() => {
-        return data.filter((e) =>
-          e.toLowerCase().includes(search.toLowerCase())
-        );
-      });
-    } else {
-      setSearchRes(null);
-    }
-  };
+  const {
+    selectItem,
+    doSearch,
+    isActive,
+    setIsActive,
+    search,
+    setSearch,
+    searchRes,
+  } = useSelect(setCurrency, setCode);
 
   return (
     <StyledWrapper>
       <StyledHead onClick={() => setIsActive((v) => !v)}>
         <StyledHeadSpan>{currency}</StyledHeadSpan>
         {isActive ? (
-          <FaAngleUp size={22} style={arrowStyles} />
+          <FaAngleUp size={22} style={iconStyles} />
         ) : (
-          <FaAngleDown size={22} style={arrowStyles} />
+          <FaAngleDown size={22} style={iconStyles} />
         )}
       </StyledHead>
       <StyledContent active={isActive}>
         <StyledSearchBar>
-          <FaSearch size={20} style={searchStyles} opacity={0.5} />
+          <FaSearch size={20} style={iconStyles} opacity={0.5} />
           <Input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
