@@ -1,22 +1,13 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
+import React, { useContext, createContext } from "react";
 import { baseUrl } from "../api/baseUrl";
+import useFetch from "../hooks/useFetch";
 
 const CurrencyNamesContext = createContext();
 
 export const useCurrencyNames = () => useContext(CurrencyNamesContext);
 
 export const CurrencyNamesProvider = ({ children }) => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState();
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch(`${baseUrl}.json`)
-      .then((data) => data.json())
-      .then((data) => setData(data))
-      .then(() => setLoading(false))
-      .catch(setError);
-  }, []);
+  const { data, loading, error } = useFetch(`${baseUrl}.json`);
 
   const getAllNames = () => {
     if (!data) return;
