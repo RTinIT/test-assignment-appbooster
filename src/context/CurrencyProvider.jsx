@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { useCurrencyNames } from "./CurrencyNamesProvider";
 import { baseUrl } from "../api/baseUrl";
+import { handleRate } from "../utils";
 
 const CurrencyContext = createContext();
 
@@ -25,7 +26,7 @@ export const CurrencyProvider = ({ children }) => {
         const { date } = data;
         const rate = {
           date,
-          rate: (amount * data[codeTo]).toFixed(2),
+          rate: handleRate(amount, data[codeTo]),
         };
         setResult(rate);
       })
