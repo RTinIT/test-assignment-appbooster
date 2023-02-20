@@ -2,7 +2,7 @@ import React from "react";
 import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import Title from "./Title";
+import Logo from "./Logo";
 
 const Nav = styled.nav`
   display: flex;
@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 const Navigation = () => {
   return (
     <Nav className="navigation">
-      <Title>currency converter</Title>
+      <Logo>currency converter</Logo>
       <Wrapper>
         <NavLink to="/test-assignment-appbooster/converter">
           <FaArrowCircleLeft size={22} color="#004dff" />
