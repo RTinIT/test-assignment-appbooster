@@ -9,12 +9,12 @@ const CurrencyExchangeRate = () => {
   const { fromCode, fromName } = useCurrency();
   const { data, loading, error } = useFetch(`${baseUrl}/${fromCode}.json`);
 
-  if (loading) return <h1>Loading...</h1>;
+  if (loading) return <h2>Loading...</h2>;
   if (error)
     return (
-      <h1>
+      <h2>
         {error}: {error.message}
-      </h1>
+      </h2>
     );
 
   return (
