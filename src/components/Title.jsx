@@ -4,8 +4,7 @@ import styled from "styled-components";
 const StyledTitle = styled.h1`
   font-size: 1.4em;
   font-weight: 800;
-  text-shadow: 1px 0px 3px var(--font-color);
-  color: #f9f5ff;
+  color: var(--font-color);
 
   @media (max-width: 960px) {
     font-size: 1.2em;
@@ -16,7 +15,8 @@ const StyledTitle = styled.h1`
 `;
 
 const StyledSpan = styled.span`
-  background: #004dff;
+  background: #fdff77fa;
+  border-radius: 4px;
 `;
 
 const Title = ({ children, highlight }) => {
