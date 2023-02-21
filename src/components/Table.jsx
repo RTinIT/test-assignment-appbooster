@@ -35,7 +35,7 @@ const StyledTh = styled.th`
   padding-bottom: 2%;
   padding-top: 2%;
   padding-left: 2%;
-  background: #1f273930;
+  background: var(--table-head-bg);
 `;
 
 const Table = ({ rate }) => {

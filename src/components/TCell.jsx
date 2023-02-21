@@ -3,11 +3,11 @@ import styled from "styled-components";
 
 const StyledTr = styled.tr`
   &:nth-child(odd) {
-    background-color: #fff;
+    background-color: var(--cell-odd-bg);
   }
 
   &:nth-child(even) {
-    background-color: var(--bg-color);
+    background-color: var(--cell-even-bg);
   }
 `;
 

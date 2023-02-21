@@ -15,7 +15,7 @@ const StyledTitle = styled.h1`
 `;
 
 const StyledSpan = styled.span`
-  background: #fdff77fa;
+  background: var(--text-highlight);
   border-radius: 4px;
 `;
 

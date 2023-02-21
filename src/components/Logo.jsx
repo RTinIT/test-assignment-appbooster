@@ -4,8 +4,9 @@ import styled from "styled-components";
 const StyledLogo = styled.h1`
   font-size: 1.4em;
   font-weight: 800;
-  text-shadow: 1px 0px 3px var(--font-color);
-  color: #f9f5ff;
+  text-shadow: 0px 0px 2px var(--logo-shadow);
+  color: var(--bg-color);
+  text-align: start;
 
   @media (max-width: 960px) {
     font-size: 1.2em;

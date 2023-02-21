@@ -72,10 +72,10 @@ const StyledSelectItems = styled.ul`
     background: #cdcdcd;
   }
   &::-webkit-scrollbar-track {
-    background: #fff;
+    background: #cdcdcd;
   }
   &::-webkit-scrollbar-thumb {
-    background: #cdcdcd;
+    background: blue;
   }
 `;
 const StyledSelectItem = styled.li`
@@ -84,7 +84,7 @@ const StyledSelectItem = styled.li`
   cursor: pointer;
 
   &:hover {
-    background: var(--bg-color);
+    background: var(--hover);
   }
 `;
 

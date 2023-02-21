@@ -3,6 +3,7 @@ import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "./Logo";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 const Nav = styled.nav`
   display: flex;
@@ -23,11 +24,12 @@ const Wrapper = styled.div`
   gap: 5px;
 `;
 
-const Navigation = () => {
+const Navigation = ({ theme, switchTheme }) => {
   return (
     <Nav className="navigation">
       <Logo>currency converter</Logo>
       <Wrapper>
+        <ThemeSwitcher theme={theme} switchTheme={switchTheme} />
         <NavLink to="/test-assignment-appbooster/converter">
           <FaArrowCircleLeft size={22} color="#004dff" />
         </NavLink>

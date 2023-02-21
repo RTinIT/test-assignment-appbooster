@@ -11,6 +11,9 @@ const StyledInput = styled.input`
   transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
   box-shadow: 0px 0px 20px -18px;
   box-sizing: border-box;
+  background: var(--bg-color);
+  color: var(--font-color);
+  transition: all 0.3s;
 
   &:active {
     transform: scale(0.95);
