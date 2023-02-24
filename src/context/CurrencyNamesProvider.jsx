@@ -1,5 +1,5 @@
 import React, { useContext, createContext } from "react";
-import { baseUrl } from "../api/baseUrl";
+import { allCurrenciesUrls } from "../api/baseUrl";
 import useFetch from "../hooks/useFetch";
 
 const CurrencyNamesContext = createContext();
@@ -7,7 +7,7 @@ const CurrencyNamesContext = createContext();
 export const useCurrencyNames = () => useContext(CurrencyNamesContext);
 
 export const CurrencyNamesProvider = ({ children }) => {
-  const { data, loading, error } = useFetch(`${baseUrl}.json`);
+  const { data, loading, error } = useFetch(allCurrenciesUrls);
 
   const getAllNames = () => {
     if (!data) return;

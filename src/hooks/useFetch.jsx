@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { fetchWithFallback } from "../utils";
 
 const useFetch = (url) => {
   const [loading, setLoading] = useState(true);
@@ -7,8 +8,8 @@ const useFetch = (url) => {
 
   useEffect(() => {
     if (!url) return;
-    fetch(url)
-      .then((data) => data.json())
+    fetchWithFallback(url)
+      .then((res) => res.json())
       .then((data) => setData(data))
       .then(() => setLoading(false))
       .catch(setError);

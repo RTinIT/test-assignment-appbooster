@@ -95,7 +95,7 @@ const ConverterField = () => {
           <Select currency={toName} setCurrency={setToName} />
         </Wrapper>
         <Wrapper gridArea="result">
-          <Output active={result ? true : false}>
+          <Output active={!!result}>
             {result ? result.rate : "Click to convert"}
           </Output>
           <Substr>

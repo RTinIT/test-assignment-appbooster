@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { useCurrencyNames } from "./CurrencyNamesProvider";
-import { baseUrl } from "../api/baseUrl";
-import { handleRate } from "../utils";
+import { baseUrls } from "../api/baseUrl";
+import { fetchWithFallback, handleRate } from "../utils";
 
 const CurrencyContext = createContext();
 
@@ -19,8 +19,14 @@ export const CurrencyProvider = ({ children }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const codeTo = getCode(toName);
+    const [withCurDate, latest] = baseUrls;
+    const urls = [
+      `${withCurDate}/${fromCode}/${codeTo}.json`,
+      `${latest}/${fromCode}/${codeTo}.json`,
+    ];
 
-    fetch(`${baseUrl}/${fromCode}/${codeTo}.json`)
+    fetchWithFallback(urls)
+      // fetch(`${baseUrls}/${fromCode}/${codeTo}.json`)
       .then((data) => data.json())
       .then((data) => {
         const { date } = data;

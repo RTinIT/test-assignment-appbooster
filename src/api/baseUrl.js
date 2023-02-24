@@ -17,4 +17,16 @@
 
 import { getDate } from "../utils";
 
-export const baseUrl = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/${getDate()}/currencies`;
+const allCurrenciesLatestUrl =
+  "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json";
+const allCurrenciesWithCurrentDateUrl = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/${getDate()}/currencies.json`;
+
+const baseUrlLatest =
+  "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies";
+const baseUrlWithCurrentDate = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/${getDate()}/currencies`;
+
+export const allCurrenciesUrls = [
+  allCurrenciesWithCurrentDateUrl,
+  allCurrenciesLatestUrl,
+];
+export const baseUrls = [baseUrlWithCurrentDate, baseUrlLatest];

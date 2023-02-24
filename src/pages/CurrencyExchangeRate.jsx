@@ -1,13 +1,16 @@
 import React from "react";
 import Table from "../components/Table";
 import { useCurrency } from "../context/CurrencyProvider";
-import { baseUrl } from "../api/baseUrl";
+import { baseUrls } from "../api/baseUrl";
 import Title from "../components/Title";
 import useFetch from "../hooks/useFetch";
 
 const CurrencyExchangeRate = () => {
   const { fromCode, fromName } = useCurrency();
-  const { data, loading, error } = useFetch(`${baseUrl}/${fromCode}.json`);
+  const { data, loading, error } = useFetch([
+    `${baseUrls[0]}/${fromCode}.json`,
+    `${baseUrls[1]}/${fromCode}.json`,
+  ]);
 
   if (loading) return <h2>Loading...</h2>;
   if (error)
