@@ -262,6 +262,7 @@ Error generating stack: `+o.message+`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  place-items: ${e=>e.gridArea==="btn"?"end":"center"};
 
   @media (max-width: 600px) {
     justify-content: center;
