@@ -22,6 +22,7 @@ const Wrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  place-items: ${(props) => (props.gridArea === "btn" ? "end" : "center")};
 
   @media (max-width: 600px) {
     justify-content: center;
