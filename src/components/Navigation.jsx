@@ -30,7 +30,7 @@ const Navigation = ({ theme, switchTheme }) => {
       <Logo>currency converter</Logo>
       <Wrapper>
         <ThemeSwitcher theme={theme} switchTheme={switchTheme} />
-        <NavLink to="/test-assignment-appbooster/converter">
+        <NavLink to="/test-assignment-appbooster/">
           <FaArrowCircleLeft size={22} color="#004dff" />
         </NavLink>
         <NavLink to="/test-assignment-appbooster/currencies-exchange-rate">

@@ -19,9 +19,7 @@ const AppRouter = () => {
       })}
       <Route
         path="*"
-        element={
-          <Converter to="/test-assignment-appbooster/converter" replace />
-        }
+        element={<Converter to="/test-assignment-appbooster/" replace />}
       />
     </Routes>
   );
